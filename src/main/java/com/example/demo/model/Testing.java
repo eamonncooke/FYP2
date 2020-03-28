@@ -5,10 +5,15 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -58,6 +63,12 @@ public class Testing implements Serializable {
     @JoinColumn(name = "playerID", referencedColumnName = "playerId")
     @ManyToOne(optional = false)
     private Player playerID;
+    
+    
+    private String trainingAttributeJSON;
+ 
+    @Convert(converter = HashMapConverter.class)
+    private Map<String, Object> trainingAttributes;
 
     public Testing() {
     }
@@ -104,6 +115,31 @@ public class Testing implements Serializable {
         this.playerID = playerID;
     }
 
+    public String getTrainingAttributeJSON() {
+        return trainingAttributeJSON;
+    }
+
+    public void setTrainingAttributeJSON(String trainingAttributeJSON) {
+        this.trainingAttributeJSON = trainingAttributeJSON;
+    }
+
+    public Map<String, Object> getTrainingAttributes() {
+        return trainingAttributes;
+    }
+
+    public void setTrainingAttributes(Map<String, Object> trainingAttributes) {
+        this.trainingAttributes = trainingAttributes;
+    }
+    
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    public void serializeCustomerAttributes() throws JsonProcessingException {
+        this.trainingAttributeJSON = objectMapper.writeValueAsString(trainingAttributes);
+    }
+    
+    public void deserializeCustomerAttributes() throws IOException {
+        this.trainingAttributes = objectMapper.readValue(trainingAttributeJSON, Map.class);
+    }
     @Override
     public int hashCode() {
         int hash = 0;
