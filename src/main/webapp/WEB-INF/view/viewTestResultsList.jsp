@@ -47,6 +47,7 @@
         <center><h1>List of Players</h1>
             <sec:authorize access="hasRole('PLAYER')">
                 <a href="\player\insertTest">Insert New Test</a>
+                <a href="\player\viewFitnessTestChart">Chart</a>
             </sec:authorize>
         
 

@@ -8,7 +8,10 @@ package com.example.demo.controller;
 import com.example.demo.model.Player;
 import com.example.demo.model.Testing;
 import com.example.demo.service.ServiceForPlayer;
+import java.util.List;
 import javax.validation.Valid;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,6 +56,14 @@ public class PlayerController {
         return auth.getName();
     }
 
+    @GetMapping("/viewFitnessTestChart")
+    public ModelAndView getFitnessTestChart(ModelMap model){
+        JSONArray testResults = chartData();
+        return new ModelAndView("/fitnessChart", "testResults",  testResults);
+    }
+    
+    
+    
     @RequestMapping("/insertTest")
     public ModelAndView insertTest(ModelMap model) {
         int testingId = service.getNewTestingNum();
@@ -86,4 +97,23 @@ public class PlayerController {
 //        service.editBreweries(brewery);
 //        return new ModelAndView("redirect:/home");
 //    }
+    
+    private JSONArray chartData(){
+        List<Testing> testList = service.getAllTest();
+        String name;
+        JSONArray ja = new JSONArray();
+        for(Testing test : testList)
+        {
+            name = test.getPlayerID().getAuthUserId().getFirstName()+" " + test.getPlayerID().getAuthUserId().getSurname();
+            JSONObject jo = new JSONObject();
+            jo.put("name", name);
+            jo.put("date", test.getDate());
+            jo.put("time", test.getTime());
+            jo.put("postion", test.getPlayerID().getPostion());
+            
+            ja.put(jo);
+        }
+        
+        return ja;
+    }
 }
