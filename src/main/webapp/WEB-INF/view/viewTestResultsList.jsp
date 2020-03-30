@@ -47,6 +47,7 @@
         <center><h1>List of Players</h1>
             <sec:authorize access="hasRole('PLAYER')">
                 <a href="\player\insertTest">Insert New Test</a>
+                <br/>
                 <a href="\player\viewFitnessTestChart">Chart</a>
             </sec:authorize>
         
@@ -59,7 +60,6 @@
                     <th align="left">Position</th>
                     <th align="left">Time</th>
                     <th align="left">Date</th>
-                    <th align="left">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,10 +69,7 @@
                         <td>${test.playerID.postion}</td>
                         <td>${test.time} seconds</td>
                         <td><fmt:formatDate type="date"  pattern="dd-MMM-yyyy" value="${test.date}"/></td>
-                        <td>
-                            <a href="\coach\edit?id=${test.testId}">Edit</a>
-                            <a href="\coach\delete?id=${test.testId}" onclick="return checkDelete()">Delete</a>
-                        </td>
+                       
                     </tr>
                 </c:forEach>
             </tbody>
