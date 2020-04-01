@@ -101,14 +101,20 @@ public class PlayerController {
     private JSONArray chartData(){
         List<Testing> testList = service.getAllTest();
         String name;
+        String newDate, month, year;
         JSONArray ja = new JSONArray();
         for(Testing test : testList)
         {
+            month = Integer.toString(test.getDate().getMonth()+1);
+            year = Integer.toString(test.getDate().getYear() + 1900);
+            
+            newDate = month +"-"+year;
             name = test.getPlayerID().getAuthUserId().getFirstName()+" " + test.getPlayerID().getAuthUserId().getSurname();
+            
             JSONObject jo = new JSONObject();
             jo.put("name", name);
-            jo.put("date", test.getDate());
-            jo.put("time", test.getTime());
+            jo.put("date", newDate);
+            jo.put("time", Integer.toString(test.getTime()));
             jo.put("postion", test.getPlayerID().getPostion());
             
             ja.put(jo);
