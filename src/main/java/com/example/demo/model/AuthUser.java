@@ -44,12 +44,12 @@ public class AuthUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "authUserId")
+    @Column(name = "auth_user_id")
     private Integer authUserId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
     @NotNull
@@ -136,7 +136,7 @@ public class AuthUser implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;

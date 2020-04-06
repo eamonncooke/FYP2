@@ -5,15 +5,10 @@
  */
 package com.example.demo.model;
 
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-//import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-//import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -48,7 +42,7 @@ public class Testing implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "testId")
+    @Column(name = "test_id")
     private Integer testId;
     @Basic(optional = false)
     @NotNull
@@ -57,18 +51,11 @@ public class Testing implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @JoinColumn(name = "playerID", referencedColumnName = "playerId")
+    @JoinColumn(name = "player_id", referencedColumnName = "player_id")
     @ManyToOne(optional = false)
-    private Player playerID;
-    
-    
-//    private String trainingAttributeJSON;
-// 
-//    @Convert(converter = HashMapConverter.class)
-//    private Map<String, Object> trainingAttributes;
+    private Player playerId;
 
     public Testing() {
     }
@@ -107,39 +94,14 @@ public class Testing implements Serializable {
         this.date = date;
     }
 
-    public Player getPlayerID() {
-        return playerID;
+    public Player getPlayerId() {
+        return playerId;
     }
 
-    public void setPlayerID(Player playerID) {
-        this.playerID = playerID;
+    public void setPlayerId(Player playerId) {
+        this.playerId = playerId;
     }
 
-//    public String getTrainingAttributeJSON() {
-//        return trainingAttributeJSON;
-//    }
-//
-//    public void setTrainingAttributeJSON(String trainingAttributeJSON) {
-//        this.trainingAttributeJSON = trainingAttributeJSON;
-//    }
-//
-//    public Map<String, Object> getTrainingAttributes() {
-//        return trainingAttributes;
-//    }
-//
-//    public void setTrainingAttributes(Map<String, Object> trainingAttributes) {
-//        this.trainingAttributes = trainingAttributes;
-//    }
-//    
-//    private static final ObjectMapper objectMapper = new ObjectMapper();
-//
-//    public void serializeCustomerAttributes() throws JsonProcessingException {
-//        this.trainingAttributeJSON = objectMapper.writeValueAsString(trainingAttributes);
-//    }
-//    
-//    public void deserializeCustomerAttributes() throws IOException {
-//        this.trainingAttributes = objectMapper.readValue(trainingAttributeJSON, Map.class);
-//    }
     @Override
     public int hashCode() {
         int hash = 0;

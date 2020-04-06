@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="\player\viewResults">Fitness Test</a></li>
-                <li><a href="#">Activity Log</a></li>
+                <li><a href="\player\activitiesPage">Activity Log</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>Player</li>

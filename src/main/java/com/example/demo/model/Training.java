@@ -42,19 +42,19 @@ public class Training implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "trainingId")
+    @Column(name = "training_id")
     private Integer trainingId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "geoLocation")
+    @Column(name = "geo_location")
     private String geoLocation;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @JoinColumn(name = "playerID", referencedColumnName = "playerId")
+    @JoinColumn(name = "playerID", referencedColumnName = "player_id")
     @ManyToOne(optional = false)
     private Player playerID;
 

@@ -42,14 +42,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Player.findByPostion", query = "SELECT p FROM Player p WHERE p.postion = :postion"),
     @NamedQuery(name = "Player.findByDob", query = "SELECT p FROM Player p WHERE p.dob = :dob"),
     @NamedQuery(name = "Player.findByHeight", query = "SELECT p FROM Player p WHERE p.height = :height"),
-    @NamedQuery(name = "Player.findByWeight", query = "SELECT p FROM Player p WHERE p.weight = :weight")})
+    @NamedQuery(name = "Player.findByWeight", query = "SELECT p FROM Player p WHERE p.weight = :weight"),
+    @NamedQuery(name = "Player.findByStravaActive", query = "SELECT p FROM Player p WHERE p.stravaActive = :stravaActive"),
+    @NamedQuery(name = "Player.findByStravaUserId", query = "SELECT p FROM Player p WHERE p.stravaUserId = :stravaUserId")})
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "playerId")
+    @Column(name = "player_id")
     private Integer playerId;
     @Basic(optional = false)
     @NotNull
@@ -66,11 +68,16 @@ public class Player implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "weight")
     private Float weight;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerID")
+    @Size(max = 20)
+    @Column(name = "strava_active")
+    private String stravaActive;
+    @Column(name = "strava_user_id")
+    private Integer stravaUserId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerId")
     private Collection<Testing> testingCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerID")
     private Collection<Training> trainingCollection;
-    @JoinColumn(name = "authUserId", referencedColumnName = "authUserId")
+    @JoinColumn(name = "auth_user_id", referencedColumnName = "auth_user_id")
     @OneToOne(optional = false)
     private AuthUser authUserId;
 
@@ -125,6 +132,22 @@ public class Player implements Serializable {
 
     public void setWeight(Float weight) {
         this.weight = weight;
+    }
+
+    public String getStravaActive() {
+        return stravaActive;
+    }
+
+    public void setStravaActive(String stravaActive) {
+        this.stravaActive = stravaActive;
+    }
+
+    public Integer getStravaUserId() {
+        return stravaUserId;
+    }
+
+    public void setStravaUserId(Integer stravaUserId) {
+        this.stravaUserId = stravaUserId;
     }
 
     @XmlTransient

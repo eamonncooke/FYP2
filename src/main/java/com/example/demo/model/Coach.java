@@ -13,9 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,15 +38,15 @@ public class Coach implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "coachId")
+    @Column(name = "coach_id")
     private Integer coachId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "role")
     private String role;
-    @JoinColumn(name = "authUserId", referencedColumnName = "authUserId")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "auth_user_id", referencedColumnName = "auth_user_id")
+    @OneToOne(optional = false)
     private AuthUser authUserId;
 
     public Coach() {
