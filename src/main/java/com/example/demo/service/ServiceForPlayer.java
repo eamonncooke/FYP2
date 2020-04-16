@@ -77,4 +77,13 @@ public class ServiceForPlayer {
         em.persist(test);
         trans.commit();
     }
+    
+    public void addStravaToPlayer(Player player)
+    {
+        EntityManager em = DBUtil.getEmf().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        em.merge(player);
+        trans.commit();
+    }
 }

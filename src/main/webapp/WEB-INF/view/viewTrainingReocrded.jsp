@@ -1,17 +1,15 @@
 <%-- 
-    Document   : viewTestResultsList
-    Created on : 27 Mar 2020, 17:36:24
+    Document   : viewTrainingReocrded
+    Created on : 9 Apr 2020, 12:56:34
     Author     : cooke
 --%>
-
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Test Results</title>
     <sec:authorize access="hasRole('COACH')">
         <%@include file="navBarCoach.jsp"%>
@@ -65,8 +63,8 @@
             <tbody>
                 <c:forEach items="${testList}" var="test"> 
                     <tr>
-                        <td>${test.playerId.authUserId.surname}, ${test.playerId.authUserId.firstName}</td>
-                        <td>${test.playerId.postion}</td>
+                        <td>${test.playerID.authUserId.surname}, ${test.playerID.authUserId.firstName}</td>
+                        <td>${test.playerID.postion}</td>
                         <td>${test.time} seconds</td>
                         <td><fmt:formatDate type="date"  pattern="dd-MMM-yyyy" value="${test.date}"/></td>
                        
@@ -74,5 +72,4 @@
                 </c:forEach>
             </tbody>
         </table></center>
-    </body>
 </html>

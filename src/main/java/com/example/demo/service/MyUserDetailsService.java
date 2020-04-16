@@ -29,7 +29,6 @@ public class MyUserDetailsService implements UserDetailsService{
         AuthUser user = repo.findByEmail(email);
         if(user == null)
             throw new UsernameNotFoundException("User not found");
-        System.out.println(user.getFirstName());
         return new UserPrincipal(user);
     }
     
